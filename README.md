@@ -4,4 +4,4 @@
 2. 缓存使用Redis
 3. mysql建表语句为blog.sql文件
 4. 前端使用VUE 
-5. 前端代码地址：https://gitee.com/shibo92/bolg-view.git
+5. 前端代码地址：https://github.com/shibo92/bolg-view.git
