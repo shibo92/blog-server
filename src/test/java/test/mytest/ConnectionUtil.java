@@ -6,8 +6,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * 建立http连接工具类
+ */
 public class ConnectionUtil {
-    public static String Connect(String address){
+    public static String Connect(String address) {
         HttpURLConnection conn = null;
         URL url = null;
         InputStream in = null;
@@ -24,12 +27,12 @@ public class ConnectionUtil {
             reader = new BufferedReader(new InputStreamReader(in));
             stringBuffer = new StringBuffer();
             String line = null;
-            while((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
                 stringBuffer.append(line);
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally{
+        } finally {
             conn.disconnect();
             try {
                 in.close();
