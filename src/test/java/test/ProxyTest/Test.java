@@ -1,8 +1,12 @@
-package test;
+package test.ProxyTest;
 
 import java.io.Serializable;
 import java.util.Arrays;
 
+/**
+ * 验证List，Map，Set中继承了AbstractClass还要implement的作用
+ * 结果：为了方便代理（被代理类需要继承接口）
+ */
 public class Test {
 
     public static interface MyInterface {
