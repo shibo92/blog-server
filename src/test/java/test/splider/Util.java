@@ -1,4 +1,4 @@
-package test.mytest;
+package test.splider;
 
 import com.github.stuxuhai.jpinyin.PinyinException;
 import com.github.stuxuhai.jpinyin.PinyinFormat;

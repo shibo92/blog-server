@@ -1,10 +1,8 @@
-package test.ProxyTest;
+package test.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Test2 extends Test {
 

@@ -1,4 +1,4 @@
-package test.mytest;
+package test.splider;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

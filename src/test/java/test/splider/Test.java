@@ -1,4 +1,4 @@
-package test.mytest;
+package test.splider;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -6,39 +6,49 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Test {
 
-    public static void main(String[] args) {
-        StringBuilder allText = new StringBuilder();
-        for (int i = 1; i <= 50; i++) {
-            System.out.println("正在爬取第" + i + "页内容。。。");
-            // 建立连接，获取网页内容
-            String html = ConnectionUtil.Connect("https://www.pengfu.com/xiaohua_" + i + ".html");
-            // 将内容转换成dom格式，方便操作
-            Document doc = Jsoup.parse(html);
-            // 获取网页内所有标题节点
-            Elements titles = doc.select("h1.dp-b");
-            for (Element titleEle : titles) {
-                Element parent = titleEle.parent();
-                // 标题内容
-                String title = titleEle.getElementsByTag("a").text();
-                // 标题对应的作者
-                String author = parent.select("p.user_name_list > a").text();
-                // 标题对应的正文
-                String content = parent.select("div.content-img").text();
-                // 将内容格式化
-                allText.append(title)
-                        .append("\r\n作者：").append(author)
-                        .append("\r\n").append(content)
-                        .append("\r\n").append("\r\n");
-            }
-            allText.append("-------------第").append(i).append("页-------------").append("\r\n");
-            System.out.println("第" + i + "页内容爬取完毕。。。");
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        long startTime = System.currentTimeMillis();
+        // 创建大小为5的线程池
+        ExecutorService esPool = Executors.newFixedThreadPool(5);
+        List<Future<StringBuilder>> futureList = new ArrayList<>();
+        Splider splider = new Splider();
+        for (int i = 1; i <= 10; i++) {
+            futureList.add(esPool.submit(splider));
         }
 
-        //将内容写入磁盘
-        Test.writeToFile(allText.toString());
+        List<StringBuilder> finishCount = new ArrayList<>();
+        for (Future<StringBuilder> future : futureList) {
+            // 线程结束，将线程返回的内容添加到list
+            finishCount.add(future.get());
+        }
+
+        /*
+         * 所有内容爬取完毕，将内容统一写入磁盘
+         */
+        if (finishCount.size() == 10) {
+            StringBuilder allText = new StringBuilder();
+            /*
+             * finishCount中future.get()的顺序 和 futureList中的future顺序一致
+             * 所以内容是从第1页...第N页顺序写入
+             */
+            for (StringBuilder pageNum : finishCount) {
+                allText.append(pageNum);
+            }
+            // 写入磁盘
+            Test.writeToFile(allText.toString());
+            long endTime = System.currentTimeMillis();
+            System.out.println("耗时 : " + (endTime - startTime));
+            // 关闭线程池
+            esPool.shutdownNow();
+        }
     }
 
     private static void getContent(String articleLink) {
@@ -53,6 +63,7 @@ public class Test {
 
     /**
      * 将内容写入到磁盘
+     *
      * @param allText
      */
     private static void writeToFile(String allText) {

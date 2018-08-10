@@ -1,4 +1,4 @@
-package test.ProxyTest;
+package test.proxy;
 
 import java.io.Serializable;
 import java.util.Arrays;
