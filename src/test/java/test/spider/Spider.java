@@ -1,4 +1,4 @@
-package test.splider;
+package test.spider;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -8,7 +8,7 @@ import org.jsoup.select.Elements;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Splider implements Callable {
+public class Spider implements Callable {
     // 使用atomicInteger保证共享变量的安全自增
     private AtomicInteger pageNum = new AtomicInteger(0);
 

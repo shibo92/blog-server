@@ -1,4 +1,4 @@
-package test.splider;
+package test.pachong;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

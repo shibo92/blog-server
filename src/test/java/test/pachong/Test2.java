@@ -1,4 +1,4 @@
-package test.splider;
+package test.pachong;
 
 public class Test2 {
     public static void main(String[] args) throws InterruptedException {

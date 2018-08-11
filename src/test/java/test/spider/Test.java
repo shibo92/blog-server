@@ -1,16 +1,12 @@
-package test.splider;
+package test.spider;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Test {
 
@@ -19,9 +15,9 @@ public class Test {
         // 创建大小为5的线程池
         ExecutorService esPool = Executors.newFixedThreadPool(5);
         List<Future<StringBuilder>> futureList = new ArrayList<>();
-        Splider splider = new Splider();
+        Spider spider = new Spider();
         for (int i = 1; i <= 10; i++) {
-            futureList.add(esPool.submit(splider));
+            futureList.add(esPool.submit(spider));
         }
 
         List<StringBuilder> finishCount = new ArrayList<>();
