@@ -1,4 +1,4 @@
-package com.proxy.test;
+package test.springaop;
 
 public class Test {
     public static void main(String[] args) {
