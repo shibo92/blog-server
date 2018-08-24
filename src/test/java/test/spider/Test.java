@@ -15,7 +15,7 @@ public class Test {
         // 创建大小为5的线程池
         ExecutorService esPool = Executors.newFixedThreadPool(5);
         List<Future<StringBuilder>> futureList = new ArrayList<>();
-        Spider spider = new Spider();
+        ThreadSpider spider = new ThreadSpider();
         for (int i = 1; i <= 10; i++) {
             futureList.add(esPool.submit(spider));
         }
