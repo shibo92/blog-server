@@ -1,5 +1,7 @@
 package test.thread.semaphor;
 
+import redis.clients.jedis.Jedis;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -7,6 +9,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Example2 {
+
     public static AtomicInteger count = new AtomicInteger(0);
     public static int clientTotal = 5000;
     public static int threadTotal = 200;

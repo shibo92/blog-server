@@ -21,8 +21,8 @@ import java.util.Map;
  */
 @Service
 public class UserServiceImpl implements UserService {
-    @Resource(name = "daoSupport")
-    private DaoSupport daoSupport;
+  /*  @Resource(name = "daoSupport")
+    private DaoSupport daoSupport;*/
     @Autowired
     private UserMapper userMapper;
 
@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
     @MyLog
     public User getUserTest(User u) throws Exception {
         System.out.println("方法中。。。。。");
-        return (User) daoSupport.findForObject("UserMapper.getUserTest", u);
+        // return (User) daoSupport.findForObject("UserMapper.getUserTest", u);
+        return null;
     }
 }

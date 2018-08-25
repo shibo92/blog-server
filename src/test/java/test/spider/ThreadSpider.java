@@ -8,7 +8,7 @@ import org.jsoup.select.Elements;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Spider implements Callable {
+public class ThreadSpider implements Callable {
     // 使用atomicInteger保证共享变量的安全自增
     // private AtomicInteger pageNum = new AtomicInteger(0);
     volatile private Integer pageNum = 0;
