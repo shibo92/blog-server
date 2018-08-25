@@ -39,7 +39,7 @@ public class Test {
                 allText.append(pageNum);
             }
             // 写入磁盘
-            Test.writeToFile(allText.toString());
+            // Test.writeToFile(allText.toString());
             long endTime = System.currentTimeMillis();
             System.out.println("耗时 : " + (endTime - startTime));
             // 关闭线程池

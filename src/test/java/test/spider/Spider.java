@@ -10,12 +10,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Spider implements Callable {
     // 使用atomicInteger保证共享变量的安全自增
-    private AtomicInteger pageNum = new AtomicInteger(0);
-
+    // private AtomicInteger pageNum = new AtomicInteger(0);
+    volatile private Integer pageNum = 0;
     @Override
     public StringBuilder call() throws Exception {
         // 当前页码
-        Integer privateNum = this.pageNum.addAndGet(1);
+        // Integer privateNum = this.pageNum.addAndGet(1);
+        Integer privateNum = pageNum++;
         // 存储当前页的文本
         StringBuilder currentPageText = new StringBuilder();
 
