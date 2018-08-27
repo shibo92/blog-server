@@ -3,6 +3,7 @@ package com.blog.controller;
 import com.alibaba.fastjson.JSON;
 import com.blog.entity.User;
 import com.blog.service.ProducerService;
+import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -53,6 +54,21 @@ public class JmsTestController {
         //发送更新数据请求
         // producerService.sendMessage(destination, JsonUtil.object2String(map));
         producerService.sendMessage(destination, sendMsgContent);
+
+        return "jms exute complete";
+    }
+
+    @RequestMapping("doMethodTest")
+    @ResponseBody
+    public String doMethodTest() throws Exception {
+
+        //系统业务需要， 需要更新用户表中信息，根据id更新name
+        List<User> list = new LinkedList<User>();
+        //发送更新数据请求
+        // producerService.sendMessage(destination, JsonUtil.object2String(map));
+        User user = new User();
+        user.setUsername("我是用户1");
+        producerService.doMethod("sayHello",user);
 
         return "jms exute complete";
     }
