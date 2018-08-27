@@ -35,16 +35,16 @@ public class GraphicsTest {
         int height = image.getHeight();
         int minx = image.getMinX();
         int miny = image.getMinY();
-        int[] rgb = new int[3];
-        int[] piexlCount = new int[width*height];
-        String blackSymbol = "*";
-        String spaceSymbol = " ";
+        String fillSymbol = " ";
 
         for (int i = minx; i < height; i++) {
             for (int j = miny+1; j < width; j++) {
                 int pixel = image.getRGB(i, j);
                 int prePixel = image.getRGB(i, j-1);
-                String printSymbol = pixel == prePixel ? blackSymbol : spaceSymbol  + (j == image.getWidth() - 1 ? "\r\n" : "");
+                if(pixel == prePixel){
+                    fillSymbol = fillSymbol.equals(" ") ? "*" : " ";
+                }
+                String printSymbol = fillSymbol  + (j == image.getWidth() - 1 ? "\r\n" : "");
                 System.out.print(printSymbol);
                 // 下面三行代码将一个数字转换为RGB数字
                 /*rgb[0] = (pixel & 0xff0000) >> 16;
