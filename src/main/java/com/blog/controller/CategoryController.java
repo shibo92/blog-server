@@ -8,7 +8,6 @@ import com.blog.entity.User;
 import com.blog.entity.vo.UserVo;
 import com.blog.service.BlogService;
 import com.blog.service.CategoryService;
-import com.blog.service.RedisCacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
