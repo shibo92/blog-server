@@ -7,7 +7,6 @@ import com.blog.entity.Category;
 import com.blog.entity.Code;
 import com.blog.entity.User;
 import com.blog.service.BlogService;
-import com.blog.service.RedisCacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,8 +27,8 @@ public class BlogController extends BaseController {
 
     @Autowired
     private BlogService blogServiceImpl;
-    @Autowired
-    private RedisCacheService redisCacheServiceImpl;
+    // @Autowired
+    // private RedisCacheService redisCacheServiceImpl;
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody

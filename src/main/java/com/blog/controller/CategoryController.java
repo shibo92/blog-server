@@ -33,8 +33,8 @@ public class CategoryController extends BaseController {
     private CategoryService categoryServiceImpl;
     @Resource(name = "blogServiceImpl")
     private BlogService blogServiceImpl;
-    @Resource(name = "redisCacheService")
-    private RedisCacheService redisCacheService;
+    // @Resource(name = "redisCacheService")
+    // private RedisCacheService redisCacheService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseBody
@@ -96,11 +96,13 @@ public class CategoryController extends BaseController {
     public JsonResult list(@PathVariable String categoryId) {
         JsonResult jsonResult = new JsonResult();
         try {
-            List<Blog> blogList = redisCacheService.getCacheList(categoryId);
+            /*List<Blog> blogList = redisCacheService.getCacheList(categoryId);
             if(blogList.isEmpty()){
                 blogList = blogServiceImpl.listBlog(categoryId);
                 redisCacheService.setCacheObject(categoryId,blogList);
-            }
+            }*/
+            List<Blog> blogList = blogServiceImpl.listBlog(categoryId);
+
             jsonResult.setInfo(ResultCode.SUCCESS, "request success", blogList);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
