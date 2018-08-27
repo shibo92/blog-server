@@ -1,5 +1,9 @@
 package test.thread.providerandconsumer;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 class Resource {
     private String name;
     private int count = 1;
@@ -17,7 +21,7 @@ class Resource {
         // this.count ++ ;
         System.out.println("生产者...生产---" + name + ++count);
         this.hasChicken = true;
-        this.notify();
+        this.notifyAll();
     }
 
     public synchronized void out() {
@@ -30,7 +34,7 @@ class Resource {
         }
         System.out.println("消费者...消费>>>" + name + count);
         this.hasChicken = false;
-        this.notify();
+        this.notifyAll();
     }
 }
 
@@ -69,7 +73,6 @@ public class ProviderAndConsumer {
         Resource chicken = new Resource();
         Provider provider = new Provider(chicken);
         Consumer consumer = new Consumer(chicken);
-
         Thread p0 = new Thread(provider);
         Thread p1 = new Thread(provider);
         Thread c0 = new Thread(consumer);
