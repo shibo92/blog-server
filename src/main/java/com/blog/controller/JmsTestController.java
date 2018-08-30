@@ -57,7 +57,7 @@ public class JmsTestController {
         // producerService.sendMessage(queueDestination, JsonUtil.object2String(map));
         producerService.sendMessage(queueDestination, sendMsgContent);
 
-        return "jms exute complete";
+        return "jms execute complete";
     }
 
     @RequestMapping("doMethodTest")
@@ -66,7 +66,7 @@ public class JmsTestController {
         User user = new User();
         user.setUsername("我是用户1");
         producerService.doMethod("sayHello",user);
-        return "jms exute complete";
+        return "jms execute complete";
     }
 
     @RequestMapping("publish")
@@ -95,7 +95,7 @@ public class JmsTestController {
         //发送更新数据请求
         producerService.sendMessage(topicDestination, sendMsgContent);
 
-        return "jms exute complete";
+        return "jms execute complete";
     }
 }
 
