@@ -37,11 +37,20 @@ public class ProducerServiceImpl implements ProducerService {
             ObjectMessage object = new ObjectMessage(method, parameter);
             message.setObject(object);
             jmsTemplate.convertAndSend(pushMsgDestination, message);
-        } catch (JmsException e) {
-            e.printStackTrace();
-        } catch (JMSException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+
+    @Override
+    public void publish(final Destination topic, final String msg) {
+        jmsTemplate.send(topic, new MessageCreator() {
+            public Message createMessage(Session session) throws JMSException {
+                System.out.println("topic name 是" + topic.toString()
+                        + "，发布消息内容为:\t" + msg);
+                return session.createTextMessage(msg);
+            }
+        });
     }
 }

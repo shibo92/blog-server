@@ -24,13 +24,15 @@ public class JmsTestController {
     private ProducerService producerService;
     @Autowired
     @Qualifier("queueDestination")
-    private Destination destination;
+    private Destination queueDestination;
+    @Autowired
+    @Qualifier("topicDestination")
+    private Destination topicDestination;
 
     @RequestMapping("test")
     @ResponseBody
     public String testSend() throws Exception {
 
-        //系统业务需要， 需要更新用户表中信息，根据id更新name
         List<User> list = new LinkedList<User>();
 
         User user = new User();
@@ -52,8 +54,8 @@ public class JmsTestController {
         String sendMsgContent = JSON.toJSONString(map);
         System.out.println("发送方发送内容为：" + sendMsgContent);
         //发送更新数据请求
-        // producerService.sendMessage(destination, JsonUtil.object2String(map));
-        producerService.sendMessage(destination, sendMsgContent);
+        // producerService.sendMessage(queueDestination, JsonUtil.object2String(map));
+        producerService.sendMessage(queueDestination, sendMsgContent);
 
         return "jms exute complete";
     }
@@ -61,14 +63,37 @@ public class JmsTestController {
     @RequestMapping("doMethodTest")
     @ResponseBody
     public String doMethodTest() throws Exception {
-
-        //系统业务需要， 需要更新用户表中信息，根据id更新name
-        List<User> list = new LinkedList<User>();
-        //发送更新数据请求
-        // producerService.sendMessage(destination, JsonUtil.object2String(map));
         User user = new User();
         user.setUsername("我是用户1");
         producerService.doMethod("sayHello",user);
+        return "jms exute complete";
+    }
+
+    @RequestMapping("publish")
+    @ResponseBody
+    public String publish() throws Exception {
+        List<User> list = new LinkedList<User>();
+
+        User user = new User();
+        user.setId("1");
+        user.setUsername("username1");
+        list.add(user);
+
+        User user2 = new User();
+        user2.setId("2222");
+        user2.setUsername("姓名2222");
+        list.add(user2);
+
+        Map<String, Object> mapEntity = new HashMap<String, Object>();
+        mapEntity.put("user", list);
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("update", mapEntity);
+        // System.out.println("发送方发送内容为：" + JSON.object2String(map));
+        String sendMsgContent = JSON.toJSONString(map);
+        System.out.println("发送方发送内容为：" + sendMsgContent);
+        //发送更新数据请求
+        producerService.sendMessage(topicDestination, sendMsgContent);
 
         return "jms exute complete";
     }
