@@ -1,6 +1,6 @@
 package com.blog.controller;
 
-import com.blog.aop.MyLog;
+import com.blog.aop.SystemLog;
 import com.blog.common.JsonResult;
 import com.blog.entity.User;
 import com.blog.service.UserService;
@@ -21,12 +21,18 @@ public class UserController extends BaseController {
     @Autowired
     private UserService userServiceImpl;
 
+    @SystemLog(description = "进入controller")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    @MyLog
     public JsonResult get(@PathVariable("id") String id) {
         JsonResult jsonResult = new JsonResult();
-        System.out.println("方法中");
+        User u = new User();
+        u.setId(id);
+        try {
+            userServiceImpl.getUserTest(u);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         jsonResult.setCode("01");
         return jsonResult;
     }
