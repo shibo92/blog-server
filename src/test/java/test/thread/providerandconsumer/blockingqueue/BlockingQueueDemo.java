@@ -1,4 +1,4 @@
-package test.thread.blockingqueue;
+package test.thread.providerandconsumer.blockingqueue;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;

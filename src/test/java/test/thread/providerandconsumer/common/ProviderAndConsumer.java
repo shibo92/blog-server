@@ -1,8 +1,4 @@
-package test.thread.providerandconsumer;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+package test.thread.providerandconsumer.common;
 
 class Resource {
     private String name;

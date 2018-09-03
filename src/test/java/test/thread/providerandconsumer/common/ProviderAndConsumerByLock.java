@@ -1,4 +1,4 @@
-package test.thread.providerandconsumer;
+package test.thread.providerandconsumer.common;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
