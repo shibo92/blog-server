@@ -1,4 +1,4 @@
-package test.thread.interrupt;
+package test.thread.stop;
 
 class MyThread extends Thread{
     public void run(){
