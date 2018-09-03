@@ -1,29 +1,31 @@
 package test.thread.stop;
 
-class MyThread extends Thread{
-    public void run(){
-        super.run();
-        try{
-            for(int i=0; i<500000; i++){
-                if(this.interrupted()) {
-                    System.out.println("线程已经终止， for循环不再执行");
-                            throw new InterruptedException();
-                }
-                System.out.println("i="+(i+1));
+class MyThread implements Runnable {
+    public boolean flag = true;
+
+    public synchronized void run() {
+        while (flag){
+            try {
+                System.out.println("进入线程啦啦啦");
+                // 使用wait后，单纯用flag标记无法将线程停止
+                // 此时需要interrupt()方法将阻塞状态清除，并返回一个InterruptedException.
+                wait();
+            } catch (InterruptedException e) {
+                System.out.println("线程即将终止");
+                flag = false;
             }
-            System.out.println("hahahaha");
-        } catch (InterruptedException e) {
-            System.out.println("发生异常，线程终止");
-            e.printStackTrace();
         }
+        System.out.println("线程终止...");
     }
 }
+
 public class InterruptTest {
-    public static void main(String args[]){
-        Thread thread = new MyThread();
+    public static void main(String args[]) {
+        MyThread myThread = new MyThread();
+        Thread thread = new Thread(myThread);
         thread.start();
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
             thread.interrupt();
         } catch (InterruptedException e) {
             e.printStackTrace();
