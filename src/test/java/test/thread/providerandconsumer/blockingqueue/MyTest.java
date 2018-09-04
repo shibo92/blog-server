@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 class Producer implements Runnable {
     // 库存队列
     private BlockingQueue<String> stock;
+    // 生产/消费延迟
     private int timeOut;
     private String name;
 
