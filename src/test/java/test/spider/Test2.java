@@ -1,11 +1,25 @@
 package test.spider;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Test2 {
     public static void main(String[] args) throws InterruptedException {
-        for(int i = 0;i<50; i++){
-            String html = ConnectionUtil.Connect("https://segmentfault.com/a/1190000015949423");
-            Thread.sleep(3000);
-            System.out.println("结束"+i);
+        AtomicInteger i = new AtomicInteger(0);
+
+        Thread threads[]=new Thread[30];
+        for(int j=0;j<1;j++){
+            threads[j]=new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (i.intValue() < 1){
+                        String html = ConnectionUtil.Connect("https://segmentfault.com/q/1010000015593182");
+                        System.out.println("结束"+i.getAndAdd(1));
+                    }
+                }
+            });
+            threads[j].start();
         }
     }
 }
