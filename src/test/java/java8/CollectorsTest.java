@@ -51,4 +51,5 @@ public class CollectorsTest {
         // 将用户列表按删除和已删除分组
         userList.sort((u1,u2) -> u2.getId().compareTo(u1.getId()));
     }
+
 }
